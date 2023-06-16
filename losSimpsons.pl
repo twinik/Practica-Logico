@@ -49,9 +49,16 @@ tioDe(unPersonaje, otroPersonaje) :-
     hermanos(unPersonaje, Madre),
     madreDe(Madre, otroPersonaje).
 
+tioDe(unPersonaje, otroPersonaje) :-
+    hermanos(unPersonaje, Padre),
+    padreDe(Padre, otroPersonaje).
+
 abueloMultiple(unPersonaje) :-
-    
+    padreDe(unPersonaje, Padre),
+    padreDe(Padre, _),
+    padreDe(Padre, _).
 
-
-
-
+abueloMultiple(unPersonaje) :-
+    madreDe(unPersonaje, Madre),
+    madreDe(Madre, _),
+    madreDe(Madre, _).
