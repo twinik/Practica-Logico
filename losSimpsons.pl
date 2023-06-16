@@ -22,43 +22,51 @@ madreDe(marge, maggie).
 madreDe(selma, ling).
 
 % Punto 1
-tieneHijo(unPersonaje) :-
-    padreDe(unPersonaje,_).
+tieneHijo(Personaje) :-
+    padreDe(Personaje,_).
 
-tieneHijo(unPersonaje) :-
-    madreDe(unPersonaje,_).
+tieneHijo(Personaje) :-
+    madreDe(Personaje,_).
 
-hermanos(unPersonaje, otroPersonaje) :-
-    padreDe(Padre, unPersonaje),
-    padreDe(Padre, otroPersonaje),
-    madreDe(Madre, unPersonaje),
-    madreDe(Madre, otroPersonaje),
-    unPersonaje \= otroPersonaje.
+hermanos(Hermano1, Hermano2) :-
+    padreDe(Padre, Hermano1),
+    padreDe(Padre, Hermano2),
+    madreDe(Madre, Hermano1),
+    madreDe(Madre, Hermano2),
+    Hermano1 \= Hermano2.
 
-medioHermanos(unPersonaje, otroPersonaje) :-
-    padreDe(Padre, unPersonaje),
-    padreDe(Padre, otroPersonaje),
-    unPersonaje \= otroPersonaje.
+medioHermanos(MedioHermano1, MedioHermano2) :-
+    padreDe(Padre, MedioHermano1),
+    padreDe(Padre, MedioHermano2),
+    MedioHermano1 \= MedioHermano2.
 
-medioHermanos(unPersonaje, otroPersonaje) :-
-    madreDe(Madre, unPersonaje),
-    madreDe(Madre, otroPersonaje),
-    unPersonaje \= otroPersonaje.
+medioHermanos(MedioHermano1, MedioHermano2) :-
+    madreDe(Madre, MedioHermano1),
+    madreDe(Madre, MedioHermano2),
+    MedioHermano1 \= MedioHermano2.
 
-tioDe(unPersonaje, otroPersonaje) :-
-    hermanos(unPersonaje, Madre),
-    madreDe(Madre, otroPersonaje).
+tioDe(Tio, Sobrino) :-
+    hermanos(Tio, Madre),
+    madreDe(Madre, Sobrino).
 
-tioDe(unPersonaje, otroPersonaje) :-
-    hermanos(unPersonaje, Padre),
-    padreDe(Padre, otroPersonaje).
+tioDe(Tio, Sobrino) :-
+    hermanos(Tio, Padre),
+    padreDe(Padre, Sobrino).
 
-abueloMultiple(unPersonaje) :-
-    padreDe(unPersonaje, Padre),
+abueloMultiple(Personaje) :-
+    padreDe(Personaje, Padre),
     padreDe(Padre, _),
     padreDe(Padre, _).
 
-abueloMultiple(unPersonaje) :-
-    madreDe(unPersonaje, Madre),
+abueloMultiple(Personaje) :-
+    madreDe(Personaje, Madre),
     madreDe(Madre, _),
     madreDe(Madre, _).
+
+% Punto 2
+descendiente(Descendiente, Ascendiente) :-
+    padreDe(Ascendiente, Descendiente).
+
+descendiente(Descendiente, Ascendiente) :-
+    padreDe(Padre, Descendiente),
+    descendiente(Padre,Ascendiente).
