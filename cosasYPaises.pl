@@ -62,7 +62,7 @@ cosaViva(flor).
 % Punto 4
 complicado(Participante) :-
     nivelActual(Participante, _),
-    forall(not(destinoPosible(Participante, Ciudad)), hablaDestinosPosibles(Ciudad, Participante)).
+    forall(destinoPosible(Participante, Ciudad), not(hablaDestinosPosibles(Ciudad, Participante))).
 
 complicado(Participante) :-
     not(nivelActual(Participante, basico)),
@@ -75,4 +75,8 @@ complicado(Participante) :-
     Capital < 500.
 
 % Punto 5
+homogeneo(Nivel) :-
+    tarea(Nivel, buscar(UnaCosa,_)),
+    forall(tarea(Nivel, buscar(OtraCosa,_)), mismaCosa(UnaCosa, OtraCosa)).
 
+mismaCosa(Cosa, Cosa).
