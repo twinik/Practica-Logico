@@ -60,7 +60,7 @@ dispuesto(winston, Cliente) :-
     Valor > 500.
 
 dispuesto(egon, Cliente) :-
-    not(tareaPedida(Cliente, Tarea, _), tareaCompleja(Tarea)).
+    not((tareaPedida(Cliente, Tarea, _), tareaCompleja(Tarea))).
 
 dispuesto(peter, _).
 
