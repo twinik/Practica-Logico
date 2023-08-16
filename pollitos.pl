@@ -37,10 +37,19 @@ valoracionAnimal(Animal, Valoracion):-
 valoracionDeEspecie(gallina(Peso, CantidadDeHuevos), Valoracion):-
     Valoracion is Peso * CantidadDeHuevos.
 
-valoracionDeEspecie(gallo(piloto), 50).
-valoracionDeEspecie(gallo(animalDeCirco), 50).
-valoracionDeEspecie(gallo(_), 25).
+valoracionDeEspecie(Gallo, 50) :-
+    sabeVolar(Gallo).
+
+valoracionDeEspecie(Gallo, 25) :-
+    not(sabeVolar(Gallo)).
+
 valoracionDeEspecie(rata, 0).
+
+sabeVolar(Gallo) :-
+    animal(Gallo, gallo(piloto)).
+
+sabeVolar(Gallo) :-
+    animal(Gallo, gallo(animalDeCirco)).
 
 % 4.
 granjaDeluxe(Granja) :-
@@ -87,12 +96,6 @@ unoSoloVuela(Gallo1, Gallo2) :-
 unoSoloVuela(Gallo1, Gallo2) :-
     sabeVolar(Gallo2),
     not(sabeVolar(Gallo1)).
-
-sabeVolar(Gallo) :-
-    animal(Gallo, gallo(piloto)).
-
-sabeVolar(Gallo) :-
-    animal(Gallo, gallo(animalDeCirco)).
 
 % 6.
 escapePerfecto(Granja) :-
